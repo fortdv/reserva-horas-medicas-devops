@@ -1,7 +1,7 @@
 # Servicio de reserva de horas médicas
 
 Prototipo académico para una institución ficticia del rubro salud. Presenta un
-formulario, información de atención y un estado informativo. Nginx sirve los
+formulario e información de atención. Nginx sirve los
 archivos estáticos dentro de un contenedor Docker.
 
 La simulación no realiza reservas, no utiliza API ni base de datos y no envía
@@ -20,7 +20,10 @@ ni almacena los valores del formulario. Utilizar exclusivamente datos ficticios.
 reserva-horas-medicas/
 ├── src/
 │   ├── index.html
-│   └── styles.css
+│   ├── styles.css
+│   ├── models/reserva-model.js
+│   ├── views/reserva-view.js
+│   └── controllers/reserva-controller.js
 ├── docs/
 │   ├── 01-diagnostico.md
 │   └── 02-ciclo-devops.md
@@ -63,8 +66,21 @@ docker stats --no-stream reserva-horas-web
 
 Comprobar respuesta HTTP 200 para la página y los estilos. En el navegador,
 completar la especialidad, fecha y horario con valores de prueba y seleccionar
-«Simular reserva». Debe aparecer un mensaje que indica que no existe una
+«Revisar reserva». Debe aparecer un resumen que indica que no existe una
 reserva real. La validación de campos ocurre en el navegador.
+
+## Arquitectura MVC
+
+El modelo define las especialidades, modalidades, horarios y reglas de validación.
+La vista agrupa index.html, styles.css y reserva-view.js: presenta los campos,
+lee la interacción y actualiza el resultado mediante nodos de texto.
+El controlador inicializa ambas clases y coordina la validación y presentación.
+Se utilizan módulos JavaScript nativos, sin dependencias externas ni servidor de aplicación.
+Las fechas anteriores al día actual y los fines de semana no son válidos.
+La información permanece transitoriamente en el formulario y no se persiste.
+
+La vista previa de desarrollo usa http://127.0.0.1:8081 y no acredita una
+ejecución con Docker. El despliegue solicitado utiliza el puerto 8080.
 
 El healthcheck verifica la respuesta local de Nginx. Un estado saludable no
 demuestra disponibilidad clínica ni capacidad bajo carga. Registrar las

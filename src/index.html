@@ -1,69 +1,44 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Simulación académica de reserva de horas médicas.">
-  <title>Reserva de horas | Centro Médico Horizonte</title>
-  <link rel="stylesheet" href="styles.css">
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Centro Médico Horizonte. Especialidades y reserva de horas.">
+<title>Reserva de horas | Centro Médico Horizonte</title>
+<link rel="stylesheet" href="styles.css"><script type="module" src="controllers/reserva-controller.js"></script>
 </head>
 <body>
-  <header class="site-header">
-    <a class="brand" href="index.html" aria-label="Centro Médico Horizonte, inicio">
-      <span class="brand-mark" aria-hidden="true">+</span>
-      <span>Horizonte<small>CENTRO MÉDICO</small></span>
-    </a>
-    <span class="demo-label">SIMULACIÓN ACADÉMICA</span>
-  </header>
-  <main>
-    <section class="intro" aria-labelledby="page-title">
-      <p class="eyebrow">ATENCIÓN AMBULATORIA</p>
-      <h1 id="page-title">Tu próxima atención,<br>en un solo lugar.</h1>
-      <p>Selecciona una especialidad y un horario para explorar el proceso de reserva.</p>
-    </section>
-    <div class="content-grid">
-      <section class="booking" aria-labelledby="form-title">
-        <div class="section-heading"><span class="step">01</span>
-          <div><h2 id="form-title">Reserva de hora médica</h2><p>Completa los datos de esta demostración.</p></div>
-        </div>
-        <form aria-describedby="privacy-note" onsubmit="event.preventDefault(); if (this.reportValidity()) document.getElementById('result').hidden = false;">
-          <div class="field"><label for="patient">Identificador ficticio</label>
-            <input id="patient" type="text" value="Paciente de prueba" maxlength="40" required autocomplete="off">
-          </div>
-          <div class="form-grid">
-            <div class="field"><label for="specialty">Especialidad</label>
-              <select id="specialty" required>
-                <option value="">Selecciona una especialidad</option>
-                <option>Medicina general</option><option>Pediatría</option><option>Dermatología</option>
-              </select>
-            </div>
-            <div class="field"><label for="modality">Modalidad</label>
-              <select id="modality" required><option>Presencial</option><option>Teleconsulta</option></select>
-            </div>
-            <div class="field"><label for="date">Fecha de atención</label><input id="date" type="date" required></div>
-            <div class="field"><label for="time">Horario</label>
-              <select id="time" required><option value="">Selecciona un horario</option>
-                <option>09:00</option><option>10:30</option><option>12:00</option><option>15:30</option>
-              </select>
-            </div>
-          </div>
-          <p class="privacy-note" id="privacy-note">Utiliza solo información ficticia. Los datos no se envían ni se almacenan.</p>
-          <button type="submit">Simular reserva <span aria-hidden="true">→</span></button>
-          <p class="result" id="result" role="status" hidden>Simulación completada. No se ha generado una reserva real.</p>
-        </form>
-      </section>
-      <aside aria-label="Información de atención">
-        <section class="information"><p class="eyebrow">ANTES DE RESERVAR</p><h2>Información de atención</h2>
-          <dl><dt>Horario referencial</dt><dd>Lunes a viernes<br>09:00 a 18:00 horas</dd>
-            <dt>Modalidades</dt><dd>Presencial y teleconsulta</dd>
-            <dt>Disponibilidad</dt><dd>Especialidades y horarios de ejemplo</dd></dl>
-        </section>
-        <section class="service"><span class="status-dot" aria-hidden="true"></span>
-          <h2>Página de demostración</h2><p>Estado informativo del prototipo.<br>No representa disponibilidad clínica en tiempo real.</p>
-        </section>
-      </aside>
-    </div>
-  </main>
-  <footer>Centro Médico Horizonte · Institución ficticia<span>Proyecto académico DevOps</span></footer>
+<header class="header">
+<a class="brand" href="index.html" aria-label="Centro Médico Horizonte, inicio"><span class="brand-symbol" aria-hidden="true"><i></i><i></i><i></i></span><span>horizonte<small>CENTRO MÉDICO</small></span></a>
+<nav aria-label="Navegación principal"><a href="#especialidades">Especialidades</a><a href="#informacion">Información de atención</a><a class="button small" href="#reserva">Reservar hora ↗</a></nav>
+</header>
+<main>
+<section class="hero" aria-labelledby="page-title">
+<div class="hero-inner">
+<div class="hero-copy"><p class="eyebrow">CERCA DE TI, EN CADA ETAPA</p><h1 id="page-title">Tu bienestar.<br><em>Un nuevo horizonte.</em></h1><p>Encuentra la atención que buscas y organiza tu próxima consulta en un solo lugar.</p><a class="button" href="#reserva">Encuentra tu hora <span aria-hidden="true">→</span></a></div>
+<div class="hero-art" aria-hidden="true"><div class="orbit"></div><div class="sun"></div><div class="landscape back"></div><div class="landscape front"></div><div class="care-card"><span class="heart">♡</span><div>Contigo, más cerca<strong>Atención para cada etapa</strong></div></div><span class="art-label">SALUD · CERCANÍA · BIENESTAR</span></div>
+</div>
+<section class="booking-layout" id="reserva" aria-labelledby="form-title">
+<div class="booking-intro"><span class="eyebrow">TU PRÓXIMO PASO</span><h2 id="form-title">Reserva<br>tu hora</h2><p>Elige cómo y cuándo<br>quieres atenderte.</p></div>
+<div class="booking-card">
+<div class="booking-top"><span class="active-label">Consulta médica</span><span class="booking-step">01 / Selecciona tu atención</span></div>
+<form id="reservation-form" aria-describedby="privacy-note">
+<div class="fields">
+<div class="field"><label for="patient">Identificador del paciente</label><input id="patient" value="Paciente de prueba" required maxlength="40" autocomplete="off"></div>
+<div class="field"><label for="specialty">Especialidad</label><select id="specialty" required><option value="">Selecciona una especialidad</option></select></div>
+<div class="field"><label for="modality">Modalidad</label><select id="modality" required><option>Presencial</option><option>Teleconsulta</option></select></div>
+<div class="field"><label for="date">Fecha de atención</label><input id="date" type="date" required></div>
+<div class="field"><label for="time">Horario</label><select id="time" required><option value="">Selecciona un horario</option></select></div>
+<button class="button submit" type="submit">Revisar reserva <span aria-hidden="true">→</span></button>
+</div>
+<p class="privacy-note" id="privacy-note">Utiliza datos ficticios. La información no se envía ni se almacena.</p>
+<div class="result" id="result" role="status" hidden></div>
+</form>
+</div>
+</section>
+</section>
+<section class="details" id="especialidades" aria-labelledby="specialties-title"><p class="eyebrow">CUIDADO PARA TI Y TU FAMILIA</p><h2 id="specialties-title">Encuentra tu especialidad</h2><div class="specialty-grid"><a href="#reserva" data-specialty="Medicina general"><span>01</span><h3>Medicina general</h3><p>El primer paso para cuidar tu salud.</p><b aria-hidden="true">↗</b></a><a href="#reserva" data-specialty="Pediatría"><span>02</span><h3>Pediatría</h3><p>Acompañamiento en cada etapa del crecimiento.</p><b aria-hidden="true">↗</b></a><a href="#reserva" data-specialty="Dermatología"><span>03</span><h3>Dermatología</h3><p>Atención enfocada en el cuidado de tu piel.</p><b aria-hidden="true">↗</b></a></div></section>
+<section class="attention" id="informacion" aria-labelledby="attention-title"><h2 id="attention-title">Planifica tu visita</h2><p><strong>Horario de atención</strong>Lunes a viernes · 09:00 a 18:00</p><p><strong>Modalidades</strong>Presencial y teleconsulta</p></section>
+</main>
+<footer><span>Horizonte · Centro Médico</span><span>Bienestar en cada etapa de tu vida.</span></footer>
 </body>
 </html>
