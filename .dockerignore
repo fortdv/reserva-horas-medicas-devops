@@ -1,0 +1,10 @@
+.git
+.env
+.env.*
+docs
+evidencias
+*.log
+*.pem
+*.key
+README.md
+.vscode
